@@ -36,8 +36,7 @@ def run_capture():
         print(f"저장 완료: {filename}")
 
         # ✅ POST 전송
-        upload_url = "https://www.dailypharm.com/api/capture/main"
-
+        upload_url = os.environ.get("UPLOAD_URL")
         with open(filename, "rb") as f:
             files = {
                 "file": (os.path.basename(filename), f, "image/png")
