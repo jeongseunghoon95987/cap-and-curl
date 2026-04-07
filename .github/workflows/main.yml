@@ -1,36 +1,31 @@
-name: Auto Screenshot Bot
+name: Auto Capture Workflow
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch: # 버튼 눌러서 수동 실행 가능하게 함
   schedule:
-    - cron: '*/10 * * * *' # 매 정각마다 실행 (UTC 기준)
-  workflow_dispatch: # 수동으로 실행하고 싶을 때 버튼 활성화
+    - cron: '0/10 * * * *' # 매 시간 정각에 실행
 
 jobs:
-  build:
+  screenshot_job:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-    - name: Install dependencies
-      run: |
-        pip install selenium webdriver-manager
+      - name: Install dependencies
+        run: |
+          pip install selenium webdriver-manager
 
-    - name: Run Screenshot Script
-      run: |
-        python auto_screenshot_headless.py # GUI를 제외한 실행용 스크립트 파일명
+      - name: Run Python Script
+        run: python capture_script.py # 위에서 만든 파일명과 똑같아야 함!
 
-    - name: Upload Screenshots Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: daily-screenshots # 다운로드 시 표시될 이름
-        path: screenshots/ # 스크린샷이 저장된 폴더 경로
-        retention-days: 5 # 보관 기간 (최대 90일)
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-screenshots
+          path: screenshots/
