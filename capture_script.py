@@ -22,7 +22,7 @@ def run_capture():
     try:
         print("페이지 접속 중...")
         driver.get("https://www.dailypharm.com") # 대상 주소
-        time.sleep(5) # 페이지가 완전히 로딩될 때까지 대기
+        time.sleep(10) # 페이지가 완전히 로딩될 때까지 대기
         
         # --- 전체 스크롤 길이를 계산하여 창 크기 조절 ---
         # 1. 자바스크립트로 문서 전체의 높이를 가져옵니다.
