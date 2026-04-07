@@ -3,7 +3,7 @@ name: Auto Capture Workflow
 on:
   workflow_dispatch: # 버튼 눌러서 수동 실행 가능하게 함
   schedule:
-    - cron: '*/10 * * * *' # 매 시간 정각에 실행
+    - cron: '0 * * * *' # 매 시간 정각에 실행
 
 jobs:
   screenshot_job:
