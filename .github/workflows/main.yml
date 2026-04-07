@@ -3,11 +3,12 @@ name: Auto Capture Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'  # 0분 간격 (안정적으로 사용)
+    - cron: '0 * * * *'
 
 jobs:
   screenshot_job:
     runs-on: ubuntu-latest
+    environment: CAPTURE   # 👈 이거 반드시 필요
 
     steps:
       - name: Checkout code
@@ -23,4 +24,7 @@ jobs:
           pip install selenium webdriver-manager requests
 
       - name: Run Python Script
+        env:
+          UPLOAD_URL: ${{ secrets.UPLOAD_URL }}
+          TARGET_URL: ${{ secrets.TARGET_URL }}
         run: python capture_script.py
