@@ -36,7 +36,7 @@ def run_capture():
         print(f"저장 완료: {filename}")
 
         # ✅ POST 전송
-        upload_url = "https://www.dailypharm.com/capture/main"
+        upload_url = "https://www.dailypharm.com/api/capture/main"
 
         with open(filename, "rb") as f:
             files = {
