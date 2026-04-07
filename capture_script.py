@@ -21,13 +21,25 @@ def run_capture():
     
     try:
         print("페이지 접속 중...")
-        driver.get("https://dailypharm.com") # 캡처하고 싶은 주소로 변경
-        time.sleep(5) 
+        driver.get("https://www.dailypharm.com") # 대상 주소
+        time.sleep(5) # 페이지가 완전히 로딩될 때까지 대기
         
-        # 4. 파일 저장
-        filename = f"screenshots/capture_{int(time.time())}.png"
+        # --- 전체 스크롤 길이를 계산하여 창 크기 조절 ---
+        # 1. 자바스크립트로 문서 전체의 높이를 가져옵니다.
+        total_height = driver.execute_script("return document.body.scrollHeight")
+        
+        # 2. 브라우저 창의 너비는 1920, 높이는 전체 높이(total_height)로 재설정합니다.
+        driver.set_window_size(1920, total_height)
+        time.sleep(1) # 크기 변경 후 잠시 대기
+        
+        # 3. 파일 저장
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        filename = f"screenshots/dailypharm_full_{timestamp}.png"
+        
+        # 이제 창 크기 자체가 길어졌으므로 전체가 찍힙니다.
         driver.save_screenshot(filename)
-        print(f"저장 완료: {filename}")
+        print(f"전체 페이지 저장 완료: {filename} (높이: {total_height}px)")
+        
     except Exception as e:
         print(f"오류 발생: {e}")
     finally:
