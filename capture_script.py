@@ -22,7 +22,7 @@ def run_capture():
     
     try:
         print("페이지 접속 중...")
-        driver.get("https://www.dailypharm.com")
+        driver.get(os.environ.get("TARGET_URL"))
         time.sleep(10)
         
         total_height = driver.execute_script("return document.body.scrollHeight")
