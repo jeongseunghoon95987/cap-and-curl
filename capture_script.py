@@ -19,14 +19,14 @@ def run_capture():
     try:
         print("페이지 접속 중...")
         driver.get(os.environ.get("TARGET_URL"))
-        time.sleep(10)
+        time.sleep(5)
         
         total_height = driver.execute_script("return document.body.scrollHeight")
         driver.set_window_size(1920, total_height)
         time.sleep(1)
         
         timestamp = time.strftime("%Y%m%d_%H%M%S")
-        filename = f"screenshots/dailypharm_full_{timestamp}.png"
+        filename = f"screenshots/dailypharm_full_{timestamp}.jpg"
         driver.save_screenshot(filename)
 
         print(f"저장 완료: {filename}")
@@ -35,7 +35,7 @@ def run_capture():
         upload_url = os.environ.get("UPLOAD_URL")
         with open(filename, "rb") as f:
             files = {
-                "file": (os.path.basename(filename), f, "image/png")
+                "file": (os.path.basename(filename), f, "image/jpg")
             }
 
             print("업로드 중...")
