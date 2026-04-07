@@ -3,8 +3,6 @@ import time
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 def run_capture():
     os.makedirs("screenshots", exist_ok=True)
@@ -15,10 +13,8 @@ def run_capture():
     opts.add_argument("--disable-dev-shm-usage")
     opts.add_argument("--window-size=1920,1080")
 
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=opts
-    )
+    # ✅ 변경된 부분 (webdriver-manager 제거)
+    driver = webdriver.Chrome(options=opts)
     
     try:
         print("페이지 접속 중...")
@@ -51,13 +47,13 @@ def run_capture():
             if res.status_code != 200:
                 raise Exception("업로드 실패")
 
-        # ✅ 성공 시 로컬 파일 삭제 (용량 관리)
+        # ✅ 성공 시 로컬 파일 삭제
         os.remove(filename)
         print("로컬 파일 삭제 완료")
 
     except Exception as e:
         print(f"오류 발생: {e}")
-        raise e  # GitHub Actions 실패 처리되게
+        raise e
 
     finally:
         driver.quit()
