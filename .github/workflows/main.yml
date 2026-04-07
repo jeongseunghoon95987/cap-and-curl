@@ -3,7 +3,7 @@ name: Auto Capture Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '* * * * *'  # 0분 간격 (안정적으로 사용)
+    - cron: '0 * * * *'  # 0분 간격 (안정적으로 사용)
 
 jobs:
   screenshot_job:
