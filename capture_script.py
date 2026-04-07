@@ -21,7 +21,7 @@ def run_capture():
     
     try:
         print("페이지 접속 중...")
-        driver.get("https://www.google.com") # 캡처하고 싶은 주소로 변경
+        driver.get("https://dailypharm.com") # 캡처하고 싶은 주소로 변경
         time.sleep(5) 
         
         # 4. 파일 저장
