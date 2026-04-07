@@ -26,7 +26,7 @@ def run_capture():
         time.sleep(1)
         
         timestamp = time.strftime("%Y%m%d_%H%M%S")
-        filename = f"screenshots/dailypharm_full_{timestamp}.jpg"
+        filename = f"screenshots/dailypharm_full_{timestamp}.png"
         driver.save_screenshot(filename)
 
         print(f"저장 완료: {filename}")
@@ -35,7 +35,7 @@ def run_capture():
         upload_url = os.environ.get("UPLOAD_URL")
         with open(filename, "rb") as f:
             files = {
-                "file": (os.path.basename(filename), f, "image/jpg")
+                "file": (os.path.basename(filename), f, "image/png")
             }
 
             print("업로드 중...")
