@@ -43,7 +43,7 @@ def run_capture():
         t = log_time("렌더링 대기(sleep 1)", t)
         
         timestamp = time.strftime("%Y%m%d_%H%M%S")
-        filename = f"screenshots/dailypharm_full_{timestamp}.png"
+        filename = f"screenshots/full_{timestamp}.png"
 
         driver.save_screenshot(filename)
         t = log_time("스크린샷 저장", t)
