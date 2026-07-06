@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '0 * * * *'
 
+permissions:
+  actions: write
+
 jobs:
   screenshot_job:
     runs-on: ubuntu-latest
@@ -34,3 +37,6 @@ jobs:
           UPLOAD_URL: ${{ secrets.UPLOAD_URL }}
           TARGET_URL: ${{ secrets.TARGET_URL }}
         run: python capture_script.py
+        
+      - name: Keepalive
+        uses: gautamkrishnar/keepalive-workflow@v2
