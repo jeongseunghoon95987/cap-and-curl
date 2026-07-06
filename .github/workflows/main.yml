@@ -38,5 +38,4 @@ jobs:
           TARGET_URL: ${{ secrets.TARGET_URL }}
         run: python capture_script.py
         
-      - name: Keepalive
-        uses: gautamkrishnar/keepalive-workflow@v2
+
