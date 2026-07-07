@@ -1,42 +1,40 @@
 name: Auto Capture Workflow
-
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 * * * *'
-
 permissions:
   actions: write
-
 jobs:
   screenshot_job:
     runs-on: ubuntu-latest
     environment: CAPTURE
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-
-      # ✅ 여기 추가
       - name: Install Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          sudo rm -f /usr/bin/chromedriver || true
-
+          echo "=== chromedriver 위치 ==="
+          which chromedriver || echo "PATH에 없음"
+          echo "=== 모든 chromedriver 제거 ==="
+          sudo rm -f $(which chromedriver) 2>/dev/null || true
+          sudo rm -f /usr/local/bin/chromedriver /usr/bin/chromedriver 2>/dev/null || true
+          echo "=== 제거 후 확인 ==="
+          which chromedriver || echo "chromedriver 제거됨(정상)"
+          echo "=== chrome 버전 ==="
+          google-chrome --version
       - name: Install dependencies
         run: |
-          pip install selenium requests   # 👉 webdriver-manager 제거
-
+          pip install --upgrade "selenium>=4.20" requests
+          python -c "import selenium; print('SELENIUM VERSION:', selenium.__version__)"
       - name: Run Python Script
         env:
           UPLOAD_URL: ${{ secrets.UPLOAD_URL }}
           TARGET_URL: ${{ secrets.TARGET_URL }}
         run: python capture_script.py
-        
-
