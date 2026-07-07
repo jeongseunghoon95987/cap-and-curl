@@ -28,6 +28,7 @@ def run_capture():
     try:
         print("페이지 접속 중...")
         driver.get(os.environ.get("TARGET_URL"))
+        print(f"TARGET_URL = {os.environ.get("TARGET_URL")}")
         t = log_time("페이지 요청(driver.get)", t)
 
         time.sleep(5)
