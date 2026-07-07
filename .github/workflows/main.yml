@@ -27,6 +27,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+          sudo rm -f /usr/bin/chromedriver || true
 
       - name: Install dependencies
         run: |
