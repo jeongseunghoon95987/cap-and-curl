@@ -27,7 +27,7 @@ jobs:
           sudo rm -f /usr/local/bin/chromedriver /usr/bin/chromedriver 2>/dev/null || true
           echo "=== 제거 후 확인 ==="
           which chromedriver || echo "chromedriver 제거됨(정상)"
-          echo "=== chrome 버전 ===2"
+          echo "=== chrome 버전 ===23"
           google-chrome --version
       - name: Install dependencies
         run: |
